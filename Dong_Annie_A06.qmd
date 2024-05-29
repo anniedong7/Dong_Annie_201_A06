@@ -1,7 +1,7 @@
 ---
 title: "Assignment 6"
 subtitle: "STAT 201"
-author: "YOUR NAME"
+author: "Annie Dong"
 
 format:
   html:
@@ -48,7 +48,7 @@ To get full credit for this Question you must:
 
 ## Github Repo Link
 
-[https://your-github-repo-url](https://your-github-repo-url)
+[https://github.com/anniedong7/Dong_Annie_201_A06ithub-repo-url](https://github.com/anniedong7/Dong_Annie_201_A06)
 
 :::
 
@@ -102,7 +102,11 @@ Extract the value `8162` (LeBron James points) in 2 different ways:
 - using names
 
 ```{r}
+num_index <- player_info[[2]][[4]]
+num_index
 
+name_index <- player_info$LJ$points
+name_index
 ```
 
 
@@ -113,7 +117,13 @@ Add a new named element to the end of each player's list called `height`. The he
 Print the `player_info` list to prove you were successful.
 
 ```{r}
+player_info$MJ$height <- 78
+player_info$LJ$height <- 81
+player_info$KB$height <- 78
+player_info$KA$height <- 86
+player_info$SO$height <- 85
 
+player_info
 ```
 
 
@@ -237,6 +247,16 @@ Example: The number 312 would return 6 (3 + 1 + 2)
 Run your function with 935068.
 
 ```{r}
+sum_of_digits <- function(n) {
+  if (n < 10) {
+    return(n)
+  }else{
+    return((n %% 10) + sum_of_digits(n %/% 10))
+  }
+}
 
+number <- 935068
+result <- sum_of_digits(number)
+result
 ```
 
