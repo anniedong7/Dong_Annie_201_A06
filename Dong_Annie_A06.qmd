@@ -142,7 +142,16 @@ Hint: initialize an empty list
 Note: this must still run correctly even if the values were to change or if another player were added to the list or if the player order changed.
 
 ```{r}
+points_per_game <- list()
 
+for(i in names(player_info)){
+  points <- player_info[[i]]$points
+  games <- player_info[[i]]$games_played
+  points_game <- points / games
+  points_per_game[[i]] <- points_game
+}
+
+points_per_game
 ```
 
 
@@ -153,7 +162,8 @@ Use the list created in Part c and an appropriate apply function to round each v
 Store the output as a vector and print the results.
 
 ```{r}
-
+round_values <- sapply(points_per_game, round, digits = 2)
+round_values
 ```
 
 
@@ -174,24 +184,20 @@ ie: 91 rounds to 90; 173 rounds to 200; 1450 rounds to 1000
 Hint: use `MARGIN = 1:2` to apply the function to each value instead of only a row/col.
 
 ```{r}
-# Custom rounding function
-custom_round <- function(x) {
-  if (nchar(x) == 2) {
+round_val <- function(x) {
+  if (x < 100) {
     return(round(x, -1))
-  } else if (nchar(x) == 3) {
+  } else if (x < 1000) {
     return(round(x, -2))
-  } else if (nchar(x) >= 4) {
-    return(round(x, -3))
   } else {
-    return(x)
+    return(round(x, -3))
   }
 }
 
-# Apply the custom rounding function to each element of the matrix
-rounded_mat <- apply(mat_rand, MARGIN = c(1, 2), FUN = custom_round)
+round_mat <- apply(mat_rand, MARGIN = 1:2, FUN = round_val)
 
-rounded_mat
-
+print(mat_rand)
+print(round_mat)
 ```
 
 
@@ -264,16 +270,15 @@ Example: The number 312 would return 6 (3 + 1 + 2)
 Run your function with 935068.
 
 ```{r}
-sum_of_digits <- function(n) {
+sum_digits <- function(n) {
   if (n < 10) {
     return(n)
   }else{
-    return((n %% 10) + sum_of_digits(n %/% 10))
+    return((n %% 10) + sum_digits(n %/% 10))
   }
 }
 
-number <- 935068
-result <- sum_of_digits(number)
-result
+my_num <- sum_digits(935068)
+my_num
 ```
 
